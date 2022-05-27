@@ -1,0 +1,16 @@
+mat-toolbar {
+    background-color: #61baba;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.floating-button{
+    float: right;
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    z-index: 100;
+    display: flex;
+}

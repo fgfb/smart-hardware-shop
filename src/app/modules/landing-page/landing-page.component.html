@@ -1,0 +1,45 @@
+<div class="container">
+
+    <div class="search">
+        <form [formGroup]="searchForm" (ngSubmit)="submit()">
+            <mat-form-field class="mat-form">
+                <input matInput formControlName="query">
+                <mat-hint>Displays first 8 suggestions</mat-hint>
+                <mat-icon matSuffix (click)="submit()">search</mat-icon>
+            </mat-form-field>
+            <mat-error *ngIf="searchForm.get('query')?.hasError('required') && isSubmitted">
+                Please enter your search term
+            </mat-error>
+
+            <ng-container *ngIf="products">
+                <mat-option *ngFor="let product of products | async | slice:0:8"
+                [routerLink]="['/products', product.id]">
+                    <a>{{ product.name }}</a>
+                </mat-option>
+            </ng-container>
+            <!-- <ng-container *ngIf="!products && searchForm.get('query').touched">
+                <mat-option>No Results Found</mat-option>
+            </ng-container> -->
+        </form>
+    </div>
+
+    <h2>Recommended Products</h2>
+    <mat-grid-list cols="5" rowHeight="600px">
+        <mat-grid-tile *ngFor="let product of recommendedProducts">
+            <mat-card class="card">
+                <mat-card-header style="min-height: 45px;">
+                    <mat-card-title>{{product.name}}</mat-card-title>
+                </mat-card-header>
+                <img mat-card-image src="{{product.defaultImage}}" alt="Photo of {{product.name}}">
+                <mat-card-content style="min-height: 130px;">
+                    <p>{{product.description}}</p>
+                    <strong>{{product.price | currency:'IKR'}} | {{product.discount}}%</strong>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="addToCart(product)">Add to Cart</button>
+                </mat-card-actions>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+

@@ -1,0 +1,27 @@
+<div class="dialog">
+    <h2 mat-dialog-title>Add/ Amend Products</h2>
+    <mat-dialog-content>
+        <form [formGroup]="productForm" (ngSubmit)="submit()">
+            <mat-form-field class="mat-form">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name">
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+                <mat-label>Price</mat-label>
+                <input matInput formControlName="price">
+            </mat-form-field>
+            <mat-form-field class="mat-form">
+                <mat-label>Discount</mat-label>
+                <input matInput formControlName="discount">
+            </mat-form-field>
+            <div class="submit-button">
+                <button style="margin-right: 5px;" mat-raised-button color="accent">Submit</button>
+                <button mat-raised-button type="button" (click)="close()" color="accent">Cancel</button>
+            </div>
+        </form>
+    </mat-dialog-content>
+</div>

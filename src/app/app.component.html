@@ -1,0 +1,21 @@
+<div class="wrapper">
+    <mat-toolbar>
+        <h1 routerLink="/" style="cursor: pointer;">Smart Hardware Shop</h1>
+        <span class="spacer"></span>
+
+        <div *ngIf="isLoggedIn()">
+            <button mat-icon-button (click)="viewCart()">
+                <mat-icon>add_shopping_cart</mat-icon>
+            </button>
+            <button mat-icon-button (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
+
+    <router-outlet></router-outlet>
+
+    <div class="floating-button" *ngIf="isAdmin()">
+        <button mat-fab color="accent" (click)="openAmendProductDialog()"><mat-icon>add</mat-icon></button>
+    </div>
+</div>

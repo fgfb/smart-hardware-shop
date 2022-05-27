@@ -1,0 +1,28 @@
+<div *ngIf="productList?.length">
+    <h2 style="margin-top: 30px; margin-left: 30px;">Search Results for "{{searchTerm}}"</h2>
+
+    <mat-paginator #paginator [length]="productList.length" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+    <mat-grid-list cols="4" rowHeight="500px">
+        <mat-grid-tile *ngFor="let product of productList | slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize)">
+            <mat-card class="card">
+                <mat-card-header [routerLink]="['/products', product.id]" style="min-height: 45px;">
+                    <mat-card-title>{{product.name}}</mat-card-title>
+                </mat-card-header>
+                <img [routerLink]="['/products', product.id]" mat-card-image src="{{product.defaultImage}}" alt="Photo of {{product.name}}">
+                <mat-card-content [routerLink]="['/products', product.id]" style="min-height: 130px;">
+                    <p>{{product.description}}</p>
+                    <strong>{{product.price | currency:'IKR'}} | {{product.discount}}% Off</strong>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="addToCart(product)">Add to Cart</button>
+                    <button mat-raised-button *ngIf="isAdmin()" color="primary" (click)="editProduct(product)">Edit</button>
+                </mat-card-actions>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+
+<div *ngIf="!productList?.length && isLoading">
+    No Results Found
+</div>

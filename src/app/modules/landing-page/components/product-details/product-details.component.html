@@ -1,0 +1,14 @@
+<mat-card class="card">
+    <mat-card-header>
+        <mat-card-title>{{product?.name}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="{{product?.defaultImage}}" alt="Photo of {{product?.name}}">
+    <mat-card-content>
+        <p>{{product?.description}}</p>
+        <strong>{{product?.price | currency:'IKR'}} | {{product?.discount}}%</strong>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="accent" (click)="addToCart(product)">Add to Cart</button>
+        <button mat-raised-button *ngIf="isAdmin()" color="primary" (click)="editProduct()">Edit</button>
+    </mat-card-actions>
+</mat-card>

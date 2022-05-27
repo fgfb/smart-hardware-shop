@@ -1,0 +1,20 @@
+<div class="container">
+    <div>
+        <mat-error *ngIf="inValidLogin" style="margin-bottom: 5px;">
+            <span>User does not exist!</span>
+        </mat-error>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="checkLogin()">
+        <mat-form-field style="width: 350px;">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" required>
+        </mat-form-field>
+        <mat-error *ngIf="loginForm.get('email')?.hasError('required') && submitted" style="margin-top: -10px;">
+            <span>Please enter your email!</span>
+        </mat-error>
+        <div>
+            <button mat-raised-button color="accent">Login</button>
+        </div>
+    </form>
+</div>
